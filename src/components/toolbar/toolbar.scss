@@ -1,0 +1,43 @@
+@import '../../index.scss';
+
+
+.toolbar {
+    height: 65px;
+    background: white;
+    border-bottom: 1px solid rgba($color: gray, $alpha: 0.3);
+
+    .toolbarContent {
+        width: 73%;
+        margin: auto;
+        display: flex;
+        padding: 8px;
+
+        .logo {
+            height: 50px;
+            width: 180px;
+        }
+
+        .buttonContainer {
+            padding-top: 3px;
+
+            .toolbarButton {
+                border: none;
+                background-color: inherit;
+                padding: 14px 28px;
+                font-size: 14px;
+                cursor: pointer;
+            }   
+            
+            .auth {
+                background-color: $opac-button-color;
+                color: $button-color;
+                width: 110px;
+                border-radius: 5px;
+                font-size: 13px;                        
+                font-weight: bold;
+            }
+            
+        }
+    }
+}
+
