@@ -1,0 +1,22 @@
+$button-color: #2f7bb9;
+$opac-button-color: #eff7ff;
+$font-family: 'Quicksand', sans-serif;
+$headfoot-border: 1px solid rgba($color: gray, $alpha: 0.15);
+$headfoot-height: 65px;
+$headfoot-backgroundcol: white; 
+
+$formfield-color: #f8f9fc;
+
+$bodywidth: 70%;
+$text-padding: 10px;
+
+@mixin PageContainer {
+    width: 100%;
+    flex: 1;    
+}
+
+@mixin Page {
+    padding: 30px;
+    width: $bodywidth;
+    margin: auto;    
+}

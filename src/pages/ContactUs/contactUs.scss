@@ -1,0 +1,39 @@
+@import '../../variables.scss';
+
+.contactUsContainer {
+    @include PageContainer();
+
+    .contactUs {
+        @include Page();
+        display: flex;
+
+        .form {
+            width: 50%;
+
+            input {
+                display: block;
+                width: 282px;
+                height: 40px;
+                border-radius: 5px;
+                background-color: $formfield-color;
+                border: $headfoot-border;
+            }
+            
+            .formRow {
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+
+        .diagram {
+            img {
+                height: 130%;
+                position: relative;
+                bottom: 87px;
+                left: 40px;
+                z-index: -1;
+            }
+        }
+    }
+}

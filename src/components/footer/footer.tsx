@@ -1,8 +1,15 @@
 import React from 'react'
+import './footer.scss'
 
 function Footer() {
   return (
-    <div className='footer'>footer</div>
+      <div className='footerContainer'>
+        <div className='footer'>
+            <p className='tag'>
+                Website developed by <u>AVAMAE</u>
+            </p>
+        </div>         
+      </div>
   )
 }
 
