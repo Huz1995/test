@@ -1,0 +1,72 @@
+@import "../../variables.scss";
+
+//mixins for form
+@mixin GeneralFieldStyles {
+   border-radius: 5px;
+   background-color: $formfield-color;
+   border: $headfoot-border;
+}
+
+@mixin InputFieldStyles {
+   @include GeneralFieldStyles();
+   display: block;
+   width: 100%;
+}
+
+input[type="text"] {
+   height: 40px;
+   @include InputFieldStyles();
+}
+
+textarea {
+   resize: none;
+   @include InputFieldStyles();
+}
+
+textarea:focus,
+input:focus {
+   outline: none;
+}
+
+label {
+   width: 100%;
+   .hint {
+      text-decoration: none;
+      @include GrayedText();
+   }
+   .italic {
+      font-style: italic;
+   }
+   .messageLabel {
+      display: flex;
+      position: relative;
+      top: 10px;
+      .hint {
+         position: relative;
+         top: 8px;
+         left: 8px;
+      }
+   }
+}
+
+.checkboxRow {
+   margin: 10px 0 15px 0;
+   align-items: center;
+   display: flex;
+
+   .checkbox {
+      height: 10px;
+      width: 10px;
+      padding: 2px;
+      margin-right: 10px;
+      @include GeneralFieldStyles();
+      cursor: pointer;
+   }
+
+   .active {
+      border-color: $button-color;
+      background-image: linear-gradient($button-color, $button-color),
+         linear-gradient($formfield-color, $formfield-color);
+      background-clip: content-box, padding-box;
+   }
+}

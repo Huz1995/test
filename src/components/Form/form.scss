@@ -1,18 +1,6 @@
 @import "../../variables.scss";
 
-@mixin GeneralFieldStyles {
-   border-radius: 5px;
-   background-color: $formfield-color;
-   border: $headfoot-border;
-}
-
-@mixin InputFieldStyles {
-   @include GeneralFieldStyles();
-   display: block;
-   width: 100%;
-}
-
-@mixin GeneralButtonStyles {
+@mixin GeneralFormButtonStyles {
    width: 101%;
    height: 45px;
    border: none;
@@ -23,86 +11,49 @@
    border-radius: 2px;
 }
 
-.form {
+.formClosed {
    width: 550px;
-   .formRow {
-      display: flex;
-      width: 100%;
-      justify-content: space-between;
+   padding-bottom: 200px;
+}
 
-      .field {
-         height: 40px;
-         @include InputFieldStyles();
-      }
+.formOpen {
+   width: 550px;
+}
 
-      textarea {
-         resize: none;
-         @include InputFieldStyles();
-      }
+.formRow {
+   display: flex;
+   width: 100%;
+   justify-content: space-between;
 
-      .fill {
-         width: 80px;
-      }
-
-      textarea:focus,
-      input:focus {
-         outline: none;
-      }
-
-      label {
-         width: 100%;
-         .hint {
-            text-decoration: none;
-            @include GrayedText();
-         }
-         .italic {
-            font-style: italic;
-         }
-         .messageLabel {
-            display: flex;
-            position: relative;
-            top: 10px;
-            .hint {
-               position: relative;
-               top: 8px;
-               left: 8px;
-            }
-         }
-      }
+   .fill {
+      width: 80px;
    }
 
-   .checkboxRow {
-      margin: 10px 0 15px 0;
-      align-items: center;
-      display: flex;
-      .checkbox {
-         @include GeneralFieldStyles();
-         margin-right: 8px;
-         width: 15px;
-         height: 15px;
-      }
+   .fill2 {
+      width: 200px;
+   }
+}
+
+.numButton {
+   background-color: $opac-button-color;
+   color: $button-color;
+   @include GeneralFormButtonStyles();
+}
+
+.submitButton {
+   background-color: $button-color;
+   color: white;
+   cursor: pointer;
+   @include GeneralFormButtonStyles();
+
+   img {
+      height: 15px;
+      float: left;
+      margin-left: 5px;
    }
 
-   .numButton {
-      background-color: $opac-button-color;
-      color: $button-color;
-      @include GeneralButtonStyles();
-   }
-
-   .submitButton {
-      background-color: $button-color;
-      color: white;
-      @include GeneralButtonStyles();
-
-      img {
-         height: 15px;
-         float: left;
-         margin-left: 5px;
-      }
-
-      label {
-         position: relative;
-         right: 10px;
-      }
+   label {
+      position: relative;
+      right: 10px;
    }
 }

@@ -12,10 +12,7 @@ function ContactUs() {
       <div className="contactUsContainer">
          <div className="contactUs">
             <Form title="Contact us" description={description}></Form>
-            <Spacer></Spacer>
-            <div className="diagram">
-               <img src={diagram} alt="cuimg" />
-            </div>
+            <img src={diagram} alt="cuimg" />
          </div>
       </div>
    );

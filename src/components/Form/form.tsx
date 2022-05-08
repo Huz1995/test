@@ -1,50 +1,203 @@
-import React from "react";
-import Spacer from "../spacer";
+import { ChangeEvent, FormEvent, useState } from "react";
 import "./form.scss";
 import sicon from "../../assets/Icon_Submit.svg";
-import { subTitle, mainText, mainTextEmph } from "../../appStructure/constants";
+import { subTitle, mainTextEmph } from "../../appStructure/constants";
+import { FormData } from "../../appStructure/models";
+import FormInput from "../FormInput/formInput";
+import { FormInputEnum } from "../../appStructure/enum";
 
 function Form({ title, description }: { title: string; description: string }) {
+   const [formState, setFormState] = useState<FormData>({
+      name: "",
+      email: "",
+      phoneNumber: "",
+      message: "",
+      addressLine1: "",
+      addressLine2: "",
+      cityTown: "",
+      stateCounty: "",
+      postcode: "",
+      country: "",
+   });
+
+   const [checkboxState, setCheckboxState] = useState<boolean>(false);
+
+   const handleFormChange = (
+      event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+      attr: keyof FormData
+   ) => {
+      event.preventDefault();
+      const newState: FormData = {
+         name: formState.name,
+         email: formState.email,
+         phoneNumber: formState.phoneNumber,
+         message: formState.message,
+         addressLine1: formState.addressLine1,
+         addressLine2: formState.addressLine2,
+         cityTown: formState.cityTown,
+         stateCounty: formState.stateCounty,
+         postcode: formState.postcode,
+         country: formState.country,
+      };
+      newState[attr] = event.target.value;
+      setFormState(newState);
+   };
+
+   const handleCheckboxChange = () => {
+      setCheckboxState(!checkboxState);
+   };
+
+   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const dataForApi = {
+         FullName: formState.name,
+         EmailAddress: formState.email,
+         PhoneNumber:
+            formState.phoneNumber === "" ? [] : [formState.phoneNumber],
+         message: formState.message,
+         bIncludeAddressDetails: checkboxState,
+         AddressDetails: {
+            AddressLine1: formState.addressLine1,
+            AddressLine2: formState.addressLine2,
+            CityTown: formState.cityTown,
+            StateCounty: formState.stateCounty,
+            Postcode: formState.postcode,
+            Country: formState.country,
+         },
+      };
+      const requestOptions = {
+         method: "post",
+         headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+         },
+         body: JSON.stringify(dataForApi),
+      };
+      fetch(
+         "https://interview-assessment.api.avamae.co.uk/api/v1/home/banner-details"
+      )
+         .then((res) => {
+            console.log(res);
+         })
+         .catch((e) => console.log(e));
+   };
+
+   const renderWhenCheckboxTicked = (): JSX.Element => {
+      if (checkboxState === true) {
+         return (
+            <>
+               <div className="formRow">
+                  <FormInput
+                     inputType={FormInputEnum.Field}
+                     handler={handleFormChange}
+                     title="Address line 1"
+                     attribute="addressLine1"
+                  ></FormInput>
+                  <div className="fill"></div>
+                  <FormInput
+                     inputType={FormInputEnum.Field}
+                     handler={handleFormChange}
+                     title="Address line 2"
+                     hint="- optional"
+                     attribute="addressLine2"
+                  ></FormInput>
+               </div>
+               <div className="formRow">
+                  <FormInput
+                     inputType={FormInputEnum.Field}
+                     handler={handleFormChange}
+                     title="City/Town"
+                     attribute="cityTown"
+                  ></FormInput>
+                  <div className="fill2"></div>
+                  <FormInput
+                     inputType={FormInputEnum.Field}
+                     handler={handleFormChange}
+                     title="State/County"
+                     attribute="stateCounty"
+                  ></FormInput>
+                  <div className="fill2"></div>
+                  <FormInput
+                     inputType={FormInputEnum.Field}
+                     handler={handleFormChange}
+                     title="Postcode"
+                     attribute="postcode"
+                  ></FormInput>
+                  <div className="fill2"></div>
+                  <FormInput
+                     inputType={FormInputEnum.Field}
+                     handler={handleFormChange}
+                     title="Country"
+                     attribute="country"
+                  ></FormInput>
+               </div>
+            </>
+         );
+      } else {
+         return <></>;
+      }
+   };
+
    return (
-      <div className="form">
+      <div className={checkboxState == false ? "formClosed" : "formOpen"}>
          <p className={subTitle}>{title}</p>
          <p className={mainTextEmph}>{description}</p>
-         <div className="formRow">
-            <label className={mainText}>
-               Name
-               <input className="field" type="text" name="name" />
-            </label>
-            <div className="fill"></div>
-            <label className={mainText}>
-               Email address
-               <input className="field" type="text" name="name" />
-            </label>
-         </div>
-         <div className="formRow">
-            <label className={mainText}>
-               Phone number 01 <u className="hint italic">- optional</u>
-               <input className="field" type="text" name="name" />
-            </label>
-         </div>
-         <button className="numButton">Add new phone number</button>
-         <div className="formRow">
-            <label className={mainText}>
-               <div className="messageLabel">
-                  <p>Message</p>
-                  <Spacer></Spacer>
-                  <u className="hint">Maximum text length is 500 characters</u>
-               </div>
-               <textarea rows={10} name="name" />
-            </label>
-         </div>
-         <div className="checkboxRow">
-            <div className="checkbox"></div>
-            <label className="mainTextEmph">Add address details</label>
-         </div>
-         <button className="submitButton">
-            <img src={sicon} alt="submit"></img>
-            <label>Submit</label>
-         </button>
+
+         <form onSubmit={(e) => handleSubmit(e)}>
+            <div className="formRow">
+               <FormInput
+                  inputType={FormInputEnum.Field}
+                  handler={handleFormChange}
+                  title="Name"
+                  attribute="name"
+               ></FormInput>
+               <div className="fill"></div>
+               <FormInput
+                  inputType={FormInputEnum.Field}
+                  handler={handleFormChange}
+                  title="Email"
+                  attribute="email"
+               ></FormInput>
+            </div>
+
+            <div className="formRow">
+               <FormInput
+                  inputType={FormInputEnum.Field}
+                  handler={handleFormChange}
+                  title="Phone number 01"
+                  hint="- optional"
+                  attribute="phoneNumber"
+               ></FormInput>
+            </div>
+
+            <button className="numButton">Add new phone number</button>
+
+            <div className="formRow">
+               <FormInput
+                  inputType={FormInputEnum.TextArea}
+                  handler={handleFormChange}
+                  title="Message"
+                  hint="Maximum text length is 500 characters"
+                  attribute="message"
+               ></FormInput>
+            </div>
+
+            <FormInput
+               inputType={FormInputEnum.Checkbox}
+               title="Add address details"
+               className={
+                  checkboxState === false ? "checkbox" : "checkbox active"
+               }
+               checkBoxClick={handleCheckboxChange}
+            ></FormInput>
+
+            {renderWhenCheckboxTicked()}
+
+            <button type="submit" className="submitButton">
+               <img src={sicon} alt="submit"></img>
+               <label>Submit</label>
+            </button>
+         </form>
       </div>
    );
 }
