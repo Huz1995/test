@@ -1,27 +1,25 @@
-@import '../../variables.scss';
+@import "../../variables.scss";
 
 .footerContainer {
+   width: 100%;
+   margin-top: auto;
 
-    width: 100%;
-    margin-top: auto;
-    
-    .footer {
-        border-top: $headfoot-border;
-        width: $bodywidth;
-        height: $headfoot-height;
-        margin:auto;
-        background-color: $headfoot-backgroundcol;
+   .footer {
+      border-top: $headfoot-border;
+      width: $bodywidth;
+      height: $headfoot-height;
+      margin: auto;
+      background-color: $headfoot-backgroundcol;
 
-        .tag {
-            color: rgba($color: gray, $alpha: 0.8);
-            font-size: 14px;
-            float: right;
-            position: relative;
-            top: 7px;
+      .tag {
+         @include GrayedText();
+         float: right;
+         position: relative;
+         top: 7px;
 
-            u {
-                text-decoration: underline;
-            }    
-        }
-    }    
+         u {
+            text-decoration: underline;
+         }
+      }
+   }
 }

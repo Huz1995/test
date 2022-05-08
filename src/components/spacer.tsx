@@ -1,10 +1,8 @@
-import React from 'react'
+import React from "react";
 
+//spacer fill space
 function Spacer() {
-  return (
-    <div style={{flexGrow: "1"}}>
-    </div>
-  )
+   return <div style={{ flexGrow: "1" }}></div>;
 }
 
-export default Spacer
+export default Spacer;

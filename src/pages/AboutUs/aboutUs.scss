@@ -1,37 +1,35 @@
-@import '../../variables.scss';
-
+@import "../../variables.scss";
 
 .aboutUsContainer {
-    @include PageContainer();
+   @include PageContainer();
 
-    .aboutUs {
-        @include Page();
+   .aboutUs {
+      @include Page();
 
-        .imgHolder{
-            padding-bottom: $text-padding;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            
-            .img {
-                height: 425px;
-                border-radius: 4px;
-            }            
-        }
+      .imgHolder {
+         padding-bottom: $text-padding;
+         width: 100%;
+         display: flex;
+         justify-content: center;
 
-        a {
-            text-decoration: underline;
-            color: #2f7bb9;
-        }
+         .img {
+            height: 425px;
+            border-radius: 4px;
+         }
+      }
 
-        ul {
-            position: relative;
-            right: 23px;
+      a {
+         text-decoration: underline;
+         color: #2f7bb9;
+      }
 
-            li::marker {
-                font-size: 9px;
-            }
-        }
+      ul {
+         position: relative;
+         right: 23px;
 
-    }
+         li::marker {
+            font-size: 9px;
+         }
+      }
+   }
 }

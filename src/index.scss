@@ -1,49 +1,53 @@
 //themes
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap');
-@import './variables.scss';
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap");
+@import "./variables.scss";
 
-@mixin textEmp {
-  font-weight: 500;
-  text-decoration: none;
-  font-size: 12px;
-}
-
-body,html,#root {
-  margin: 0;
-  font-family: $font-family;
-  height: 100%;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body,
+html,
+#root {
+   margin: 0;
+   font-family: $font-family;
+   height: 100%;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
 }
 
 #root {
- display: flex;
- flex-direction: column;
+   display: flex;
+   flex-direction: column;
 }
 
+//basic typography theming
+
 .subTitle {
-    font-size: 25px;
-    font-weight: 450;
+   font-size: 25px;
+   font-weight: 450;
 }
 
 .subSubTitle {
-    font-size: 18px;
-    font-weight: 500;
+   font-size: 18px;
+   font-weight: 500;
 }
 
 .mainText {
-    font-size: 12px;
-    line-height: 2;
-    font-weight: 300;
-    padding-bottom: $text-padding;
+   font-size: 12px;
+   line-height: 2;
+   font-weight: 300;
+   padding-bottom: $text-padding;
+}
+
+@mixin textEmp {
+   font-weight: 500;
+   text-decoration: none;
+   font-size: 12px;
 }
 
 .mainTextEmph {
-  @include textEmp();
-  line-height: 2;  
+   @include textEmp();
+   line-height: 2;
 }
 
 .listText {
-  @include textEmp();
-  line-height: 2.2;
+   @include textEmp();
+   line-height: 2.2;
 }
