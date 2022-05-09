@@ -10,3 +10,9 @@ export type FormData = {
    postcode: string;
    country: string;
 };
+
+export type CarouselData = {
+   Title: string;
+   Subtitle: string;
+   ImageUrl: string;
+};

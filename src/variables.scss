@@ -20,6 +20,7 @@ $formfield-color: #f8f9fc;
 //styles for page containers
 $bodywidth: 75%;
 $text-padding: 10px;
+
 @mixin PageContainer {
    width: 100%;
    flex: 1;

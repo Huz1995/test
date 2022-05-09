@@ -1,0 +1,193 @@
+@import "../../variables.scss";
+
+@mixin buttonStyles {
+   color: $opac-button-color;
+   background-color: $button-color;
+   width: 130px;
+   border-radius: 3px;
+   font-size: 12px;
+   font-weight: 1000;
+   border: none;
+   padding: 15px 30px;
+   cursor: pointer;
+   font-family: $font-family;
+   margin-top: 20px;
+}
+
+.swiper {
+   height: 500px;
+
+   .swiper-button-prev,
+   .swiper-button-next {
+      color: white;
+      background-color: rgba(255, 255, 255, 0.2);
+      width: 40px;
+      height: 40px;
+      font-size: 1px;
+      border-radius: 2px;
+   }
+   .swiper-button-prev::after {
+      content: "◀";
+      font-size: 13px;
+   }
+   .swiper-button-next::after {
+      content: "▶";
+      font-size: 13px;
+   }
+   .swiper-pagination-bullet {
+      width: 7px;
+      height: 7px;
+      background-color: white;
+      opacity: 1;
+   }
+   .swiper-pagination-bullet-active {
+      width: 11px;
+      height: 11px;
+      background: $button-color;
+      position: relative;
+      top: 2px;
+   }
+
+   #img1 {
+      width: 100%;
+      height: 100%;
+      -o-object-fit: cover;
+      object-fit: cover;
+      object-position: 0% 27%;
+      transform: scale(1.07);
+   }
+   #img2 {
+      width: 100%;
+      height: 100%;
+      -o-object-fit: cover;
+      object-fit: cover;
+      object-position: 0% 50%;
+   }
+
+   .fade {
+      width: 50%;
+      height: 100%;
+      position: absolute;
+      z-index: 1000;
+      background: linear-gradient(
+         to left,
+         transparent 0%,
+         rgba(0, 0, 0, 0.9) 100%
+      );
+
+      .carouselTextHolder {
+         position: relative;
+         left: 25%;
+         top: 29%;
+         color: #ffffff;
+         font-weight: bold;
+
+         button {
+            @include buttonStyles();
+         }
+      }
+   }
+}
+
+.secondRowContainer {
+   @include PageContainer();
+
+   .secondRow {
+      @include Page();
+      display: flex;
+      padding: 70px;
+
+      .textHolder {
+         width: 1000px;
+         margin-right: 60px;
+         .subTitle {
+            margin-top: 0;
+         }
+         .listText {
+            position: relative;
+            bottom: 10px;
+            padding: 10px;
+         }
+      }
+      button {
+         position: relative;
+         bottom: 20px;
+         @include buttonStyles();
+      }
+      .imgHolder {
+         display: flex;
+         justify-content: center;
+
+         .img {
+            position: relative;
+            top: 10px;
+            height: 345px;
+            width: 550px;
+
+            border-radius: 4px;
+         }
+      }
+   }
+}
+
+.thirdRowContainer {
+   background-image: url("../../assets/shutterstock_1302552622.jpg");
+   height: 500px;
+   background-position-x: center;
+
+   .thirdRow {
+      @include Page();
+
+      .textHolder {
+         padding: 30px;
+         width: 500px;
+         margin-right: 90px;
+         background-color: rgba(99, 92, 88, 1);
+         color: white;
+         border-radius: 2px;
+         position: relative;
+         top: 50px;
+         .subTitle {
+            margin-top: 0;
+         }
+         .listText {
+            position: relative;
+            bottom: 10px;
+            padding: 10px;
+         }
+
+         button {
+            @include buttonStyles();
+            background: rgba(238, 247, 255, 1);
+            color: $button-color;
+            font-weight: bolder;
+         }
+      }
+   }
+}
+
+.fourthRowContainer {
+   height: 610px;
+   @include PageContainer();
+   text-align: center;
+   .fourthRow {
+      justify-content: center;
+      @include Page();
+      .subSubTitle {
+         position: relative;
+         bottom: 15px;
+      }
+      .mainText {
+         -moz-column-count: 3;
+         -moz-column-gap: 50px;
+         -webkit-column-count: 3;
+         -webkit-column-gap: 50px;
+         column-count: 3;
+         column-gap: 50px;
+         text-align: start;
+      }
+      button {
+         @include buttonStyles();
+      }
+   }
+}

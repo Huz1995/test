@@ -74,11 +74,11 @@ function Form({ title, description }: { title: string; description: string }) {
          body: JSON.stringify(dataForApi),
       };
       fetch(
-         "https://interview-assessment.api.avamae.co.uk/api/v1/home/banner-details"
+         "https://interview-assessment.api.avamae.co.uk/api/v1/contact-us/submit",
+         requestOptions
       )
-         .then((res) => {
-            console.log(res);
-         })
+         .then((res) => res.json())
+         .then((data) => console.log(data))
          .catch((e) => console.log(e));
    };
 

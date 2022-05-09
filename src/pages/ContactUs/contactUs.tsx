@@ -1,7 +1,6 @@
 import React from "react";
 import "./contactUs.scss";
 import diagram from "../../assets/Img_Contact.png";
-import Spacer from "../../components/spacer";
 import Form from "../../components/Form/form";
 
 function ContactUs() {
