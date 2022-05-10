@@ -21,6 +21,8 @@ $formfield-color: #f8f9fc;
 $bodywidth: 75%;
 $text-padding: 10px;
 
+$mediaquery-max: 628px;
+
 @mixin PageContainer {
    width: 100%;
    flex: 1;

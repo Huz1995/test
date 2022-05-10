@@ -28,12 +28,21 @@
    .fill {
       width: 80px;
    }
-
-   .fill2 {
-      width: 200px;
-   }
 }
 
+#bottomRow {
+   justify-content: space-around;
+   .fill2 {
+      width: 80px;
+   }
+   #middleFill {
+      width: 60px;
+   }
+   .subRow {
+      display: flex;
+      justify-content: space-between;
+   }
+}
 .numButton {
    background-color: $opac-button-color;
    color: $button-color;
@@ -55,5 +64,21 @@
    label {
       position: relative;
       right: 10px;
+   }
+}
+
+@media only screen and (max-width: $mediaquery-max) {
+   .formClosed {
+      padding-bottom: 0px;
+   }
+
+   #bottomRow {
+      display: block;
+      .subRow {
+         display: flex;
+         #hideFill {
+            display: none;
+         }
+      }
    }
 }

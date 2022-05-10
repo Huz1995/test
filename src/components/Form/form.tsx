@@ -102,34 +102,38 @@ function Form({ title, description }: { title: string; description: string }) {
                      attribute="addressLine2"
                   ></FormInput>
                </div>
-               <div className="formRow">
-                  <FormInput
-                     inputType={FormInputEnum.Field}
-                     handler={handleFormChange}
-                     title="City/Town"
-                     attribute="cityTown"
-                  ></FormInput>
-                  <div className="fill2"></div>
-                  <FormInput
-                     inputType={FormInputEnum.Field}
-                     handler={handleFormChange}
-                     title="State/County"
-                     attribute="stateCounty"
-                  ></FormInput>
-                  <div className="fill2"></div>
-                  <FormInput
-                     inputType={FormInputEnum.Field}
-                     handler={handleFormChange}
-                     title="Postcode"
-                     attribute="postcode"
-                  ></FormInput>
-                  <div className="fill2"></div>
-                  <FormInput
-                     inputType={FormInputEnum.Field}
-                     handler={handleFormChange}
-                     title="Country"
-                     attribute="country"
-                  ></FormInput>
+               <div id="bottomRow" className="formRow">
+                  <div className="subRow">
+                     <FormInput
+                        inputType={FormInputEnum.Field}
+                        handler={handleFormChange}
+                        title="City/Town"
+                        attribute="cityTown"
+                     ></FormInput>
+                     <div className="fill2"></div>
+                     <FormInput
+                        inputType={FormInputEnum.Field}
+                        handler={handleFormChange}
+                        title="State/County"
+                        attribute="stateCounty"
+                     ></FormInput>
+                  </div>
+                  <div id="middleFill" className="fill2"></div>
+                  <div className="subRow">
+                     <FormInput
+                        inputType={FormInputEnum.Field}
+                        handler={handleFormChange}
+                        title="Postcode"
+                        attribute="postcode"
+                     ></FormInput>
+                     <div className="fill2"></div>
+                     <FormInput
+                        inputType={FormInputEnum.Field}
+                        handler={handleFormChange}
+                        title="Country"
+                        attribute="country"
+                     ></FormInput>
+                  </div>
                </div>
             </>
          );
