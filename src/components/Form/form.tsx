@@ -5,21 +5,14 @@ import { subTitle, mainTextEmph } from "../../appStructure/constants";
 import { FormData } from "../../appStructure/models";
 import FormInput from "../FormInput/formInput";
 import { FormInputEnum } from "../../appStructure/enum";
+import { CreateFormObject, GetValidationObject } from "../../appStructure/util";
 
 function Form({ title, description }: { title: string; description: string }) {
-   const [formState, setFormState] = useState<FormData>({
-      name: "",
-      email: "",
-      phoneNumber: "",
-      message: "",
-      addressLine1: "",
-      addressLine2: "",
-      cityTown: "",
-      stateCounty: "",
-      postcode: "",
-      country: "",
-   });
-
+   const formId = "testForm";
+   const [formState, setFormState] = useState<FormData>(CreateFormObject(null));
+   const [validationState, setValidationState] = useState<FormData>(
+      CreateFormObject(null)
+   );
    const [checkboxState, setCheckboxState] = useState<boolean>(false);
 
    const handleFormChange = (
@@ -28,18 +21,8 @@ function Form({ title, description }: { title: string; description: string }) {
    ) => {
       event.preventDefault();
       //create new state from prev state
-      const newState: FormData = {
-         name: formState.name,
-         email: formState.email,
-         phoneNumber: formState.phoneNumber,
-         message: formState.message,
-         addressLine1: formState.addressLine1,
-         addressLine2: formState.addressLine2,
-         cityTown: formState.cityTown,
-         stateCounty: formState.stateCounty,
-         postcode: formState.postcode,
-         country: formState.country,
-      };
+      const newState: FormData = CreateFormObject(formState);
+      //set new data in state
       newState[attr] = event.target.value;
       setFormState(newState);
    };
@@ -50,6 +33,7 @@ function Form({ title, description }: { title: string; description: string }) {
 
    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
+      //convert data for api
       const dataForApi = {
          FullName: formState.name,
          EmailAddress: formState.email,
@@ -66,6 +50,7 @@ function Form({ title, description }: { title: string; description: string }) {
             Country: formState.country,
          },
       };
+
       const requestOptions = {
          method: "post",
          headers: {
@@ -79,7 +64,19 @@ function Form({ title, description }: { title: string; description: string }) {
          requestOptions
       )
          .then((res) => res.json())
-         .then((data) => console.log(data))
+         .then((data) => {
+            if (data.Status === "1") {
+               alert("Submission sucessfull");
+               setFormState(CreateFormObject(null));
+               setValidationState(CreateFormObject(null));
+               setCheckboxState(false);
+            }
+            if (data.Status === "0") {
+               const validation = GetValidationObject(data.Errors);
+               setValidationState(validation);
+               console.log(validationState);
+            }
+         })
          .catch((e) => console.log(e));
    };
 
@@ -87,12 +84,14 @@ function Form({ title, description }: { title: string; description: string }) {
       if (checkboxState === true) {
          return (
             <>
-               <div className="formRow">
+               <div id="addessRow" className="formRow">
                   <FormInput
                      inputType={FormInputEnum.Field}
                      handler={handleFormChange}
                      title="Address line 1"
                      attribute="addressLine1"
+                     value={formState.addressLine1}
+                     validation={validationState.addressLine1}
                   ></FormInput>
                   <div className="fill"></div>
                   <FormInput
@@ -101,6 +100,8 @@ function Form({ title, description }: { title: string; description: string }) {
                      title="Address line 2"
                      hint="- optional"
                      attribute="addressLine2"
+                     value={formState.addressLine2}
+                     validation={validationState.addressLine2}
                   ></FormInput>
                </div>
                <div id="bottomRow" className="formRow">
@@ -110,6 +111,8 @@ function Form({ title, description }: { title: string; description: string }) {
                         handler={handleFormChange}
                         title="City/Town"
                         attribute="cityTown"
+                        value={formState.cityTown}
+                        validation={validationState.cityTown}
                      ></FormInput>
                      <div className="fill2"></div>
                      <FormInput
@@ -117,6 +120,8 @@ function Form({ title, description }: { title: string; description: string }) {
                         handler={handleFormChange}
                         title="State/County"
                         attribute="stateCounty"
+                        value={formState.stateCounty}
+                        validation={validationState.stateCounty}
                      ></FormInput>
                   </div>
                   <div id="middleFill" className="fill2"></div>
@@ -126,6 +131,8 @@ function Form({ title, description }: { title: string; description: string }) {
                         handler={handleFormChange}
                         title="Postcode"
                         attribute="postcode"
+                        value={formState.postcode}
+                        validation={validationState.postcode}
                      ></FormInput>
                      <div className="fill2"></div>
                      <FormInput
@@ -133,6 +140,8 @@ function Form({ title, description }: { title: string; description: string }) {
                         handler={handleFormChange}
                         title="Country"
                         attribute="country"
+                        value={formState.country}
+                        validation={validationState.country}
                      ></FormInput>
                   </div>
                </div>
@@ -148,13 +157,15 @@ function Form({ title, description }: { title: string; description: string }) {
          <p className={subTitle}>{title}</p>
          <p className={mainTextEmph}>{description}</p>
 
-         <form onSubmit={(e) => handleSubmit(e)}>
+         <form id={formId} onSubmit={(e) => handleSubmit(e)}>
             <div className="formRow">
                <FormInput
                   inputType={FormInputEnum.Field}
                   handler={handleFormChange}
                   title="Name"
                   attribute="name"
+                  value={formState.name}
+                  validation={validationState.name}
                ></FormInput>
                <div className="fill"></div>
                <FormInput
@@ -162,6 +173,8 @@ function Form({ title, description }: { title: string; description: string }) {
                   handler={handleFormChange}
                   title="Email address"
                   attribute="email"
+                  value={formState.email}
+                  validation={validationState.email}
                ></FormInput>
             </div>
 
@@ -172,6 +185,8 @@ function Form({ title, description }: { title: string; description: string }) {
                   title="Phone number 01"
                   hint="- optional"
                   attribute="phoneNumber"
+                  value={formState.phoneNumber}
+                  validation={validationState.phoneNumber}
                ></FormInput>
             </div>
 
@@ -184,6 +199,8 @@ function Form({ title, description }: { title: string; description: string }) {
                   title="Message"
                   hint="Maximum text length is 500 characters"
                   attribute="message"
+                  value={formState.message}
+                  validation={validationState.message}
                ></FormInput>
             </div>
 

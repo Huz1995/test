@@ -13,6 +13,8 @@ function FormInput({
    attribute,
    className,
    checkBoxClick,
+   value,
+   validation,
 }: {
    inputType: FormInputEnum;
    handler?: (
@@ -24,12 +26,15 @@ function FormInput({
    hint?: string;
    className?: string;
    checkBoxClick?: () => void;
+   value?: string;
+   validation?: string;
 }) {
    if (inputType === FormInputEnum.TextArea) {
       return (
          <label className={mainText}>
             <div className="messageLabel">
                <p>{title}</p>
+               {/* if there is a hint */}
                {hint != null ? (
                   <>
                      <Spacer></Spacer>
@@ -42,10 +47,12 @@ function FormInput({
                )}
             </div>
             <textarea
+               value={value}
                onChange={(e) => handler!(e, attribute!)}
                rows={8}
                name="name"
             />
+            <div className="validation">{validation}</div>
          </label>
       );
    } else if (inputType === FormInputEnum.Field) {
@@ -54,10 +61,12 @@ function FormInput({
             {title}
             {hint != null ? <u className="hint italic">{hint}</u> : <></>}
             <input
+               value={value}
                onChange={(e) => handler!(e, attribute!)}
                type="text"
                name="name"
             />
+            <div className="validation">{validation}</div>
          </label>
       );
    }
