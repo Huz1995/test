@@ -1,8 +1,9 @@
 @import "../../variables.scss";
 
+$swiper-height: 500px;
 @mixin buttonStyles {
    color: $opac-button-color;
-   background-color: $button-color;
+   background-color: $main-color;
    width: 130px;
    border-radius: 3px;
    font-size: 12px;
@@ -14,8 +15,32 @@
    margin-top: 20px;
 }
 
+.infoDiv {
+   height: $swiper-height;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   .loader {
+      border: 16px solid #f3f3f3; /* Light grey */
+      border-top: 16px solid $main-color; /* Blue */
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      animation: spin 2s linear infinite;
+   }
+
+   @keyframes spin {
+      0% {
+         transform: rotate(0deg);
+      }
+      100% {
+         transform: rotate(360deg);
+      }
+   }
+}
+
 .swiper {
-   height: 500px;
+   height: $swiper-height;
 
    .swiper-button-prev,
    .swiper-button-next {
@@ -43,7 +68,7 @@
    .swiper-pagination-bullet-active {
       width: 11px;
       height: 11px;
-      background: $button-color;
+      background: $main-color;
       position: relative;
       top: 2px;
    }
@@ -78,10 +103,14 @@
       .carouselTextHolder {
          position: relative;
          left: 25%;
-         top: 29%;
+         top: 26%;
          color: #ffffff;
          font-weight: bold;
-
+         .title {
+            font-size: 35px;
+            font-weight: 100;
+            margin: 0;
+         }
          button {
             @include buttonStyles();
          }
@@ -95,8 +124,6 @@
    .secondRow {
       @include Page();
       display: flex;
-      padding: 70px;
-
       .textHolder {
          width: 1000px;
          margin-right: 60px;
@@ -117,6 +144,7 @@
       .imgHolder {
          display: flex;
          justify-content: center;
+         width: 100%;
 
          .img {
             position: relative;
@@ -133,7 +161,8 @@
 .thirdRowContainer {
    background-image: url("../../assets/shutterstock_1302552622.jpg");
    height: 500px;
-   background-position-x: center;
+   background-position: 40% 8%;
+   background-size: 120%;
 
    .thirdRow {
       @include Page();
@@ -142,7 +171,7 @@
          padding: 30px;
          width: 500px;
          margin-right: 90px;
-         background-color: rgba(99, 92, 88, 1);
+         background: rgba(99, 92, 88, 1);
          color: white;
          border-radius: 2px;
          position: relative;
@@ -159,15 +188,13 @@
          button {
             @include buttonStyles();
             background: rgba(238, 247, 255, 1);
-            color: $button-color;
-            font-weight: bolder;
+            color: $main-color;
          }
       }
    }
 }
 
 .fourthRowContainer {
-   height: 610px;
    @include PageContainer();
    text-align: center;
    .fourthRow {
@@ -188,6 +215,99 @@
       }
       button {
          @include buttonStyles();
+      }
+   }
+}
+
+@media only screen and (max-width: 1300px) {
+   .secondRowContainer {
+      .secondRow {
+         width: 100%;
+         padding: 0;
+         display: block;
+         -webkit-transform: rotate(-180deg);
+         transform: rotate(-180deg);
+         .textHolder {
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+            width: 100%;
+
+            button {
+               width: 100%;
+            }
+         }
+         img {
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+            max-width: 100%;
+            height: auto;
+         }
+      }
+   }
+}
+@media only screen and (max-width: 600px) {
+   .swiper {
+      .swiper-button-prev,
+      .swiper-button-next {
+         display: none;
+      }
+      .swiper-slide {
+      }
+      .fade {
+         width: 100%;
+         .carouselTextHolder {
+            left: 0%;
+            padding: 0 20px 0 20px;
+            margin: auto;
+            button {
+               width: 100%;
+            }
+         }
+      }
+      #img1 {
+         object-position: 47% 10%;
+         transform: scale(1);
+      }
+      #img2 {
+         object-position: 70% 0%;
+      }
+   }
+}
+
+@media only screen and (max-width: 1000px) {
+   .thirdRowContainer {
+      height: 550px;
+      background-position: 55% 0%;
+      background-size: 205%;
+      .thirdRow {
+         .textHolder {
+            width: 100%;
+            margin-right: 50px;
+            background: rgba(0, 0, 0, 0.5);
+            top: 10px;
+            right: 25px;
+            button {
+               width: 100%;
+            }
+         }
+      }
+   }
+
+   .fourthRowContainer {
+      @include PageContainer();
+      .fourthRow {
+         .mainText {
+            -moz-column-count: 1;
+            -moz-column-gap: 0px;
+            -webkit-column-count: 1;
+            -webkit-column-gap: 0px;
+            column-count: 1;
+            column-gap: 0px;
+            text-align: start;
+         }
+         button {
+            width: 100%;
+         }
       }
    }
 }

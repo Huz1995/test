@@ -30,7 +30,7 @@
 
          .auth {
             background-color: $opac-button-color;
-            color: $button-color;
+            color: $main-color;
             width: 110px;
             border-radius: 5px;
             font-size: 13px;
@@ -41,11 +41,13 @@
 }
 
 @media only screen and (max-width: 1000px) {
-   .buttonContainer {
-      display: none !important;
-   }
-   .logo {
-      position: relative;
-      left: 25%;
+   .toolbarContent {
+      justify-content: center;
+      .buttonContainer {
+         display: none !important;
+      }
+      .spacer {
+         display: none !important;
+      }
    }
 }

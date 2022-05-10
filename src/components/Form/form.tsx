@@ -27,6 +27,7 @@ function Form({ title, description }: { title: string; description: string }) {
       attr: keyof FormData
    ) => {
       event.preventDefault();
+      //create new state from prev state
       const newState: FormData = {
          name: formState.name,
          email: formState.email,
@@ -143,7 +144,7 @@ function Form({ title, description }: { title: string; description: string }) {
    };
 
    return (
-      <div className={checkboxState == false ? "formClosed" : "formOpen"}>
+      <div className={checkboxState === false ? "formClosed" : "formOpen"}>
          <p className={subTitle}>{title}</p>
          <p className={mainTextEmph}>{description}</p>
 
@@ -159,7 +160,7 @@ function Form({ title, description }: { title: string; description: string }) {
                <FormInput
                   inputType={FormInputEnum.Field}
                   handler={handleFormChange}
-                  title="Email"
+                  title="Email address"
                   attribute="email"
                ></FormInput>
             </div>

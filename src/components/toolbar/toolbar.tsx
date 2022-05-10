@@ -7,7 +7,9 @@ function Toolbar() {
    return (
       <div className="toolbar">
          <div className="toolbarContent">
-            <img className="logo" src={logo} alt="Logo" />
+            <Link to="/">
+               <img className="logo" src={logo} alt="Logo" />
+            </Link>
             <Spacer></Spacer>
             <div className="buttonContainer">
                <Link to="/">

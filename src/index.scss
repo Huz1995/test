@@ -1,5 +1,5 @@
 //themes
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 @import "./variables.scss";
 
 @mixin default {
@@ -25,12 +25,12 @@ html {
 
 .subTitle {
    font-size: 25px;
-   font-weight: 450;
+   font-weight: 400;
 }
 
 .subSubTitle {
    font-size: 18px;
-   font-weight: 500;
+   font-weight: 600;
 }
 
 .mainText {
@@ -41,7 +41,7 @@ html {
 }
 
 @mixin textEmp {
-   font-weight: 500;
+   font-weight: 600;
    text-decoration: none;
    font-size: 12px;
 }

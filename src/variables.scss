@@ -1,9 +1,9 @@
 //button default colors
-$button-color: #2f7bb9;
+$main-color: #2f7bb9;
 $opac-button-color: #eff7ff;
 
 //fontfamily
-$font-family: "Quicksand", sans-serif;
+$font-family: "Open Sans", sans-serif;
 
 //styles for footer and header
 $headfoot-border: 2px solid
@@ -21,11 +21,8 @@ $formfield-color: #f8f9fc;
 $bodywidth: 75%;
 $text-padding: 10px;
 
-$mediaquery-max: 628px;
-
 @mixin PageContainer {
    width: 100%;
-   flex: 1;
 }
 @mixin Page {
    padding: 30px;

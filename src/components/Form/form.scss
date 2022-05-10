@@ -45,12 +45,12 @@
 }
 .numButton {
    background-color: $opac-button-color;
-   color: $button-color;
+   color: $main-color;
    @include GeneralFormButtonStyles();
 }
 
 .submitButton {
-   background-color: $button-color;
+   background-color: $main-color;
    color: white;
    cursor: pointer;
    @include GeneralFormButtonStyles();
@@ -67,7 +67,7 @@
    }
 }
 
-@media only screen and (max-width: $mediaquery-max) {
+@media only screen and (max-width: 1000px) {
    .formClosed {
       padding-bottom: 0px;
    }

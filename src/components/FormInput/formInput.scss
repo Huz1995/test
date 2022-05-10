@@ -64,8 +64,8 @@ label {
    }
 
    .active {
-      border-color: $button-color;
-      background-image: linear-gradient($button-color, $button-color),
+      border-color: $main-color;
+      background-image: linear-gradient($main-color, $main-color),
          linear-gradient($formfield-color, $formfield-color);
       background-clip: content-box, padding-box;
    }

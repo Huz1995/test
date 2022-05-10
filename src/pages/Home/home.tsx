@@ -40,9 +40,12 @@ function Home() {
                   const rawData: CarouselData = data.Details[index];
                   cArray.push(rawData);
                }
+               //save data and change loading state
                setCarousel(cArray);
                setLoading(false);
-            } else if (data.Status === "0") {
+            }
+            //set error if any issues
+            else if (data.Status === "0") {
                setLoading(false);
                setError(true);
             }
@@ -55,9 +58,17 @@ function Home() {
 
    const GetCarosaul = (): JSX.Element => {
       if (loading === true) {
-         return <div>Loading</div>;
+         return (
+            <div className="infoDiv">
+               <div className="loader"></div>
+            </div>
+         );
       } else if (error === true) {
-         return <div>Error</div>;
+         return (
+            <div className="infoDiv">
+               Error... Unable to fetch data for caroseul
+            </div>
+         );
       }
 
       return (
@@ -72,10 +83,12 @@ function Home() {
                }}
                className="mySwiper"
             >
+               {/* the title and text displayed on the demo was same for both images
+               and in the demo the caroseul only had two images, which is why didnt use map  */}
                <SwiperSlide>
                   <div className="fade">
                      <div className="carouselTextHolder">
-                        <h1>{carouselState[0].Title}</h1>
+                        <p className="title">{carouselState[0].Title}</p>
                         <p className={subSubTitle}>
                            {carouselState[2].Subtitle}
                         </p>
@@ -89,7 +102,7 @@ function Home() {
                <SwiperSlide>
                   <div className="fade">
                      <div className="carouselTextHolder">
-                        <h1>{carouselState[0].Title}</h1>
+                        <p className="title">{carouselState[0].Title}</p>
                         <p className={subSubTitle}>
                            {carouselState[2].Subtitle}
                         </p>
