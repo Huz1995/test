@@ -136,7 +136,9 @@ function Home() {
                         abhorreant
                      </li>
                   </ul>
-                  <button>Learn more</button>
+                  <Link to="/about-us">
+                     <button>Learn more</button>
+                  </Link>
                </div>
                <div className="imgHolder">
                   <img className="img" src={deskImg} alt="aimg"></img>
@@ -219,7 +221,7 @@ function Home() {
                   nec leo malesuada porttitor sit amet et magna.
                </p>
                <Link to="/contact-us">
-                  <button className="button">Contact us</button>
+                  <button>Contact us</button>
                </Link>
             </div>
          </div>

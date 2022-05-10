@@ -2,9 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap");
 @import "./variables.scss";
 
-body,
-html,
-#root {
+@mixin default {
    margin: 0;
    font-family: $font-family;
    height: 100%;
@@ -12,7 +10,13 @@ html,
    -moz-osx-font-smoothing: grayscale;
 }
 
+body,
+html {
+   @include default();
+}
+
 #root {
+   @include default();
    display: flex;
    flex-direction: column;
 }

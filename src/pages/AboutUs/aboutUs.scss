@@ -7,7 +7,7 @@
       @include Page();
 
       .imgHolder {
-         padding-bottom: $text-padding;
+         padding: $text-padding;
          width: 100%;
          display: flex;
          justify-content: center;
@@ -29,6 +29,23 @@
 
          li::marker {
             font-size: 9px;
+         }
+      }
+   }
+}
+
+@media only screen and (max-width: 1000px) {
+   .aboutUsContainer {
+      padding: 0px;
+      .aboutUs {
+         padding: 0px;
+         .imgHolder {
+            padding: 0;
+            .img {
+               max-width: 100%;
+               height: auto;
+               width: auto;
+            }
          }
       }
    }
