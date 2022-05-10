@@ -35,7 +35,7 @@ html {
 
 .mainText {
    font-size: 12px;
-   line-height: 2;
+   line-height: 1.8;
    font-weight: 300;
    padding-bottom: $text-padding;
 }
@@ -48,7 +48,7 @@ html {
 
 .mainTextEmph {
    @include textEmp();
-   line-height: 2;
+   line-height: 1.8;
 }
 
 .listText {
