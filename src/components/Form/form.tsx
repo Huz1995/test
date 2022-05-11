@@ -47,7 +47,6 @@ function Form({ title, description }: { title: string; description: string }) {
          phoneNumberState,
          checkboxState
       );
-      console.log(dataForApi);
       const requestOptions = {
          method: "post",
          headers: {
@@ -89,7 +88,7 @@ function Form({ title, description }: { title: string; description: string }) {
    const handleNumberChange = (
       event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
    ) => {
-      //index is passed as name param in input
+      //index is passed as name param in input tag
       const index = parseInt(event.target.name);
       var newArray = [...phoneNumberState];
       newArray[index] = event.target.value;
@@ -251,7 +250,15 @@ function Form({ title, description }: { title: string; description: string }) {
    };
 
    return (
-      <div className={checkboxState === false ? "formClosed" : "formOpen"}>
+      <div
+         className={
+            success === true
+               ? "formSuccess"
+               : checkboxState === false
+               ? "formClosed"
+               : "formOpen"
+         }
+      >
          <p className={subTitle}>{title}</p>
          <p className={mainTextEmph}>{description}</p>
          {renderFormBody()}

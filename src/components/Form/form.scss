@@ -12,14 +12,23 @@
    padding: 0;
 }
 
-.formClosed {
+@mixin formWidth() {
    width: 550px;
+}
+
+.formClosed {
+   @include formWidth();
    padding-bottom: 200px;
 }
 
 .formOpen {
-   width: 550px;
+   @include formWidth();
    padding-bottom: 10px;
+}
+
+.formSuccess {
+   @include formWidth();
+   padding-bottom: 500px;
 }
 
 .formRow {
