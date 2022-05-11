@@ -11,7 +11,7 @@ import {
    GetValidationObject,
    GenPhoneNumberTitle,
 } from "../../appStructure/formHelpers";
-import Success from "../Success/success";
+import Success from "../success/success";
 
 function Form({ title, description }: { title: string; description: string }) {
    const formId = "testForm";
