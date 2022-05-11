@@ -223,8 +223,8 @@ $swiper-height: 500px;
    .secondRowContainer {
       .secondRow {
          @include PageWithSmallScreen();
-         padding: 50px 30px 30px 30px;
          display: block;
+         margin-top: 50px;
          -webkit-transform: rotate(-180deg);
          transform: rotate(-180deg);
          .textHolder {
@@ -305,7 +305,6 @@ $swiper-height: 500px;
    .fourthRowContainer {
       .fourthRow {
          @include PageWithSmallScreen();
-         padding: 15px 30px 30px 30px;
 
          .mainText {
             -moz-column-count: 1;
