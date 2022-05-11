@@ -11,7 +11,9 @@ function ContactUs() {
       <div className="contactUsContainer">
          <div className="contactUs">
             <Form title="Contact us" description={description}></Form>
-            <img className="svgImg" src={diagram} alt="cuimg" />
+            <div className="svgImg">
+               <img src={diagram} alt="cuimg" />
+            </div>
          </div>
       </div>
    );

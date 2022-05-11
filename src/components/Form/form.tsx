@@ -6,6 +6,7 @@ import { FormData } from "../../appStructure/models";
 import FormInput from "../FormInput/formInput";
 import { FormInputEnum } from "../../appStructure/enum";
 import { CreateFormObject, GetValidationObject } from "../../appStructure/util";
+import Success from "../Success/success";
 
 function Form({ title, description }: { title: string; description: string }) {
    const formId = "testForm";
@@ -14,6 +15,7 @@ function Form({ title, description }: { title: string; description: string }) {
       CreateFormObject(null)
    );
    const [checkboxState, setCheckboxState] = useState<boolean>(false);
+   const [success, setSucess] = useState<boolean>(false);
 
    const handleFormChange = (
       event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -66,10 +68,10 @@ function Form({ title, description }: { title: string; description: string }) {
          .then((res) => res.json())
          .then((data) => {
             if (data.Status === "1") {
-               alert("Submission sucessfull");
                setFormState(CreateFormObject(null));
                setValidationState(CreateFormObject(null));
                setCheckboxState(false);
+               setSucess(true);
             }
             if (data.Status === "0") {
                const validation = GetValidationObject(data.Errors);
@@ -152,11 +154,11 @@ function Form({ title, description }: { title: string; description: string }) {
       }
    };
 
-   return (
-      <div className={checkboxState === false ? "formClosed" : "formOpen"}>
-         <p className={subTitle}>{title}</p>
-         <p className={mainTextEmph}>{description}</p>
-
+   const renderFormBody = () => {
+      if (success === true) {
+         return <Success></Success>;
+      }
+      return (
          <form id={formId} onSubmit={(e) => handleSubmit(e)}>
             <div className="formRow">
                <FormInput
@@ -220,6 +222,14 @@ function Form({ title, description }: { title: string; description: string }) {
                <label>Submit</label>
             </button>
          </form>
+      );
+   };
+
+   return (
+      <div className={checkboxState === false ? "formClosed" : "formOpen"}>
+         <p className={subTitle}>{title}</p>
+         <p className={mainTextEmph}>{description}</p>
+         {renderFormBody()}
       </div>
    );
 }

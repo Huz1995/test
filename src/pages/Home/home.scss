@@ -222,7 +222,7 @@ $swiper-height: 500px;
 @media only screen and (max-width: 1100px) {
    .secondRowContainer {
       .secondRow {
-         width: 90%;
+         @include PageWithSmallScreen();
          padding: 50px 30px 30px 30px;
          display: block;
          -webkit-transform: rotate(-180deg);
@@ -304,7 +304,7 @@ $swiper-height: 500px;
 
    .fourthRowContainer {
       .fourthRow {
-         width: 90%;
+         @include PageWithSmallScreen();
          padding: 15px 30px 30px 30px;
 
          .mainText {

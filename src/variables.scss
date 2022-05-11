@@ -24,12 +24,16 @@ $text-padding: 10px;
 @mixin PageContainer {
    width: 100%;
 }
+
 @mixin Page {
    padding: 30px;
    width: $bodywidth;
    margin: auto;
 }
 
+@mixin PageWithSmallScreen {
+   width: 90%;
+}
 //styles for the grayed out texr
 @mixin GrayedText {
    color: rgba($color: gray, $alpha: 0.8);
