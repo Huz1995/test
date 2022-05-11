@@ -5,7 +5,6 @@ export const CreateFormObject = (previousFormObj: FormData | null) => {
       return {
          name: previousFormObj.name,
          email: previousFormObj.email,
-         phoneNumber: previousFormObj.phoneNumber,
          message: previousFormObj.message,
          addressLine1: previousFormObj.addressLine1,
          addressLine2: previousFormObj.addressLine2,
@@ -26,6 +25,28 @@ export const CreateFormObject = (previousFormObj: FormData | null) => {
       stateCounty: "",
       postcode: "",
       country: "",
+   };
+};
+
+export const GenerateDataForApi = (
+   rawFormData: FormData,
+   numbers: string[],
+   checkboxState: boolean
+) => {
+   return {
+      FullName: rawFormData.name,
+      EmailAddress: rawFormData.email,
+      PhoneNumber: numbers,
+      message: rawFormData.message,
+      bIncludeAddressDetails: checkboxState,
+      AddressDetails: {
+         AddressLine1: rawFormData.addressLine1,
+         AddressLine2: rawFormData.addressLine2,
+         CityTown: rawFormData.cityTown,
+         StateCounty: rawFormData.stateCounty,
+         Postcode: rawFormData.postcode,
+         Country: rawFormData.country,
+      },
    };
 };
 
@@ -54,3 +75,8 @@ export const GetValidationObject = (
    });
    return validation;
 };
+
+export const GenPhoneNumberTitle = (index: number) => {
+   const num = index+1;
+   return "Phone number 0" +num;
+}

@@ -5,7 +5,12 @@ import { subTitle, mainTextEmph } from "../../appStructure/constants";
 import { FormData } from "../../appStructure/models";
 import FormInput from "../FormInput/formInput";
 import { FormInputEnum } from "../../appStructure/enum";
-import { CreateFormObject, GetValidationObject } from "../../appStructure/util";
+import {
+   CreateFormObject,
+   GenerateDataForApi,
+   GetValidationObject,
+   GenPhoneNumberTitle,
+} from "../../appStructure/formHelpers";
 import Success from "../Success/success";
 
 function Form({ title, description }: { title: string; description: string }) {
@@ -14,18 +19,19 @@ function Form({ title, description }: { title: string; description: string }) {
    const [validationState, setValidationState] = useState<FormData>(
       CreateFormObject(null)
    );
+   const [phoneNumberState, setPhoneNumberState] = useState<string[]>([""]);
    const [checkboxState, setCheckboxState] = useState<boolean>(false);
    const [success, setSucess] = useState<boolean>(false);
 
    const handleFormChange = (
-      event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-      attr: keyof FormData
+      event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
    ) => {
       event.preventDefault();
+      const key = event.target.name as keyof FormData;
       //create new state from prev state
       const newState: FormData = CreateFormObject(formState);
       //set new data in state
-      newState[attr] = event.target.value;
+      newState[key] = event.target.value;
       setFormState(newState);
    };
 
@@ -36,23 +42,12 @@ function Form({ title, description }: { title: string; description: string }) {
    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       //convert data for api
-      const dataForApi = {
-         FullName: formState.name,
-         EmailAddress: formState.email,
-         PhoneNumber:
-            formState.phoneNumber === "" ? [] : [formState.phoneNumber],
-         message: formState.message,
-         bIncludeAddressDetails: checkboxState,
-         AddressDetails: {
-            AddressLine1: formState.addressLine1,
-            AddressLine2: formState.addressLine2,
-            CityTown: formState.cityTown,
-            StateCounty: formState.stateCounty,
-            Postcode: formState.postcode,
-            Country: formState.country,
-         },
-      };
-
+      const dataForApi = GenerateDataForApi(
+         formState,
+         phoneNumberState,
+         checkboxState
+      );
+      console.log(dataForApi);
       const requestOptions = {
          method: "post",
          headers: {
@@ -70,16 +65,35 @@ function Form({ title, description }: { title: string; description: string }) {
             if (data.Status === "1") {
                setFormState(CreateFormObject(null));
                setValidationState(CreateFormObject(null));
+               setPhoneNumberState([""]);
                setCheckboxState(false);
                setSucess(true);
             }
             if (data.Status === "0") {
+               console.log(data.Errors);
                const validation = GetValidationObject(data.Errors);
                setValidationState(validation);
-               console.log(validationState);
+               console.log(validation);
             }
          })
          .catch((e) => console.log(e));
+   };
+
+   const genNewNum = () => {
+      if (phoneNumberState.length < 3) {
+         let array = [...phoneNumberState, ""];
+         setPhoneNumberState(array);
+      }
+   };
+
+   const handleNumberChange = (
+      event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+   ) => {
+      //index is passed as name param in input
+      const index = parseInt(event.target.name);
+      var newArray = [...phoneNumberState];
+      newArray[index] = event.target.value;
+      setPhoneNumberState(newArray);
    };
 
    const renderWhenCheckboxTicked = (): JSX.Element => {
@@ -103,7 +117,6 @@ function Form({ title, description }: { title: string; description: string }) {
                      hint="- optional"
                      attribute="addressLine2"
                      value={formState.addressLine2}
-                     validation={validationState.addressLine2}
                   ></FormInput>
                </div>
                <div id="bottomRow" className="formRow">
@@ -156,7 +169,12 @@ function Form({ title, description }: { title: string; description: string }) {
 
    const renderFormBody = () => {
       if (success === true) {
-         return <Success></Success>;
+         return (
+            <Success
+               title="Your message has been sent"
+               text="We will be in contact with you within 24 hours"
+            ></Success>
+         );
       }
       return (
          <form id={formId} onSubmit={(e) => handleSubmit(e)}>
@@ -180,19 +198,26 @@ function Form({ title, description }: { title: string; description: string }) {
                ></FormInput>
             </div>
 
-            <div className="formRow">
-               <FormInput
-                  inputType={FormInputEnum.Field}
-                  handler={handleFormChange}
-                  title="Phone number 01"
-                  hint="- optional"
-                  attribute="phoneNumber"
-                  value={formState.phoneNumber}
-                  validation={validationState.phoneNumber}
-               ></FormInput>
-            </div>
+            {phoneNumberState.map((number, i) => (
+               <div id={i.toString()} className="formRow">
+                  <FormInput
+                     inputType={FormInputEnum.Field}
+                     handler={handleNumberChange}
+                     title={GenPhoneNumberTitle(i)}
+                     hint="- optional"
+                     value={phoneNumberState[i]}
+                     attribute={i.toString()}
+                  ></FormInput>
+               </div>
+            ))}
 
-            <button className="numButton">Add new phone number</button>
+            <button
+               type="button"
+               onClick={() => genNewNum()}
+               className="numButton"
+            >
+               Add new phone number
+            </button>
 
             <div className="formRow">
                <FormInput

@@ -48,6 +48,7 @@
 .numButton {
    background-color: $opac-button-color;
    color: $main-color;
+   cursor: pointer;
    @include GeneralFormButtonStyles();
 }
 

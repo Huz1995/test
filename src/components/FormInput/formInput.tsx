@@ -18,11 +18,10 @@ function FormInput({
 }: {
    inputType: FormInputEnum;
    handler?: (
-      event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-      attr: keyof FormData
+      event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
    ) => void;
    title: string;
-   attribute?: keyof FormData;
+   attribute?: string;
    hint?: string;
    className?: string;
    checkBoxClick?: () => void;
@@ -48,9 +47,9 @@ function FormInput({
             </div>
             <textarea
                value={value}
-               onChange={(e) => handler!(e, attribute!)}
+               onChange={(e) => handler!(e)}
                rows={8}
-               name="name"
+               name={attribute!}
             />
             <div className="validation">{validation}</div>
          </label>
@@ -62,9 +61,9 @@ function FormInput({
             {hint != null ? <u className="hint italic">{hint}</u> : <></>}
             <input
                value={value}
-               onChange={(e) => handler!(e, attribute!)}
+               onChange={(e) => handler!(e)}
                type="text"
-               name="name"
+               name={attribute!}
             />
             <div className="validation">{validation}</div>
          </label>

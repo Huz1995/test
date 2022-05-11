@@ -36,9 +36,9 @@
 
 @media only screen and (max-width: 1000px) {
    .aboutUsContainer {
-      padding: 0px;
       .aboutUs {
-         padding: 0px;
+         @include PageWithSmallScreen();
+
          .imgHolder {
             padding: 0;
             .img {
